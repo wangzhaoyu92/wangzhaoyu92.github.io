@@ -146,6 +146,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-hexo-yilia主题的所有文章功能不能用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/02/15/hexo-yilia%E4%B8%BB%E9%A2%98%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0%E5%8A%9F%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8/">hexo yilia主题的所有文章功能不能用</a>
+    </h1>
+  
+
+        
+        <a href="/2022/02/15/hexo-yilia%E4%B8%BB%E9%A2%98%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0%E5%8A%9F%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2022-02-15T09:10:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="node-js版本必须6-2以上"><a href="#node-js版本必须6-2以上" class="headerlink" title="node.js版本必须6.2以上"></a>node.js版本必须6.2以上</h2><h2 id="在hexo根目录下执行命令："><a href="#在hexo根目录下执行命令：" class="headerlink" title="在hexo根目录下执行命令："></a>在hexo根目录下执行命令：</h2><pre><code>npm i hexo-generator-json-content --save
+
+如添加 hexo-generator-json-content 如遇报错 请使用 npm audit 检查
+
+之后输入 npm audit fix 进行修复 或 npm audit fix --force 进行强制修复
+
+然后在 npm audit 确认没有问题之后 重新执行下列命令在hexo项目根目录
+
+npm i hexo-generator-json-content --save
+</code></pre>
+<h2 id="在hexo的配置文件-config-yml最后添加-切记必须是根目录下的-config-yml-不是themes下的"><a href="#在hexo的配置文件-config-yml最后添加-切记必须是根目录下的-config-yml-不是themes下的" class="headerlink" title="在hexo的配置文件_config.yml最后添加,切记必须是根目录下的_config.yml;不是themes下的"></a>在hexo的配置文件_config.yml最后添加,切记必须是根目录下的_config.yml;不是themes下的</h2><pre><code>jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true 
+</code></pre>
+<h2 id="完成添加后-执行-hexo-clean-gt-gt-hexo-g-gt-gt-hexo-s-本地查看效果-或-hexo-d-直接部署就行了。"><a href="#完成添加后-执行-hexo-clean-gt-gt-hexo-g-gt-gt-hexo-s-本地查看效果-或-hexo-d-直接部署就行了。" class="headerlink" title="完成添加后 执行 hexo clean &gt;&gt; hexo g &gt;&gt; hexo s 本地查看效果 或 hexo d 直接部署就行了。"></a>完成添加后 执行 hexo clean &gt;&gt; hexo g &gt;&gt; hexo s 本地查看效果 或 hexo d 直接部署就行了。</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/02/15/hexo-yilia%E4%B8%BB%E9%A2%98%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0%E5%8A%9F%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Mac-下的常用终端命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
