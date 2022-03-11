@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>linux查看日志的几种方法 | Hexo</title>
+  <title>Lock wait timeout exceeded; try restarting transaction | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="linux 日志查看tail、head、 cat、tac、sed、less、echo1、命令格式: tail       [必要参数]     [选择参数]     [文件]-f 循环读取  -q 不显示处理信息  -v 显示详细的处理信息  -c&lt;数目&gt; 显示的字节数  -n&lt;行数&gt; 显示行数  -q, --quiet, --silent 从不输出给出文件名的首部  -s">
+  <meta name="description" content="目录一、问题抛出 二、解决方案 三、三张表字段说明 innodb_trx innodb_locks innodb_lock_waits 四、终极方法 小结 一、问题抛出在做查询语句时，MySQL 抛出了这样的异常：    MySQL server error report:Array     (         [0] &#x3D;&gt; Array             (">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux查看日志的几种方法">
-<meta property="og:url" content="http://example.com/2022/02/16/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:title" content="Lock wait timeout exceeded; try restarting transaction">
+<meta property="og:url" content="http://example.com/2022/03/11/Lock-wait-timeout-exceeded-try-restarting-transaction/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="linux 日志查看tail、head、 cat、tac、sed、less、echo1、命令格式: tail       [必要参数]     [选择参数]     [文件]-f 循环读取  -q 不显示处理信息  -v 显示详细的处理信息  -c&lt;数目&gt; 显示的字节数  -n&lt;行数&gt; 显示行数  -q, --quiet, --silent 从不输出给出文件名的首部  -s">
+<meta property="og:description" content="目录一、问题抛出 二、解决方案 三、三张表字段说明 innodb_trx innodb_locks innodb_lock_waits 四、终极方法 小结 一、问题抛出在做查询语句时，MySQL 抛出了这样的异常：    MySQL server error report:Array     (         [0] &#x3D;&gt; Array             (">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-16T05:17:46.000Z">
-<meta property="article:modified_time" content="2022-02-16T05:30:23.951Z">
+<meta property="article:published_time" content="2022-03-11T01:49:16.000Z">
+<meta property="article:modified_time" content="2022-03-11T01:53:08.989Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -148,124 +148,98 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-linux查看日志的几种方法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Lock-wait-timeout-exceeded-try-restarting-transaction" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      linux查看日志的几种方法
+      Lock wait timeout exceeded; try restarting transaction
     </h1>
   
 
         
-        <a href="/2022/02/16/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2022-02-16T05:17:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-16</time>
+        <a href="/2022/03/11/Lock-wait-timeout-exceeded-try-restarting-transaction/" class="archive-article-date">
+  	<time datetime="2022-03-11T01:49:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="linux-日志查看"><a href="#linux-日志查看" class="headerlink" title="linux 日志查看"></a>linux 日志查看</h2><h3 id="tail、head、-cat、tac、sed、less、echo"><a href="#tail、head、-cat、tac、sed、less、echo" class="headerlink" title="tail、head、 cat、tac、sed、less、echo"></a>tail、head、 cat、tac、sed、less、echo</h3><h3 id="1、命令格式-tail-必要参数-选择参数-文件"><a href="#1、命令格式-tail-必要参数-选择参数-文件" class="headerlink" title="1、命令格式: tail       [必要参数]     [选择参数]     [文件]"></a>1、命令格式: tail       [必要参数]     [选择参数]     [文件]</h3><pre><code>-f 循环读取
-
--q 不显示处理信息
-
--v 显示详细的处理信息
-
--c&lt;数目&gt; 显示的字节数
-
--n&lt;行数&gt; 显示行数
-
--q, --quiet, --silent 从不输出给出文件名的首部
-
--s, --sleep-interval=S 与-f合用,表示在每次反复的间隔休眠S秒
-
-tail -n 100 catalina.out 查询日志尾部最后100行的日志;
-
-tail -n +100 catalina.out 查询100行之后的所有日志;
-
-tail -fn 100  catalina.out 循环实时查看最后100行记录(最常用的)
-
-配合着grep用, 例如 : tail -fn 100 catalina.out | grep   -- &#39;关键字&#39;
-
-如果一次性查询的数据量太大,可以进行翻页查看,
-
-例如:tail -n 6000  catalina.out |more -100 可以进行多屏显示(ctrl + f 或者 空格键可以快捷键)
-
-
-
-2、head
-
-head -n  1000  catalina.out   //查询日志文件中的头10行日志;
-head -n -1000  catalina.out   //查询日志文件除了最后10行的其他所有日志;
-
-head其他参数与tail 类似
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>一、问题抛出</p>
+<p>二、解决方案</p>
+<p>三、三张表字段说明</p>
+<p>innodb_trx</p>
+<p>innodb_locks</p>
+<p>innodb_lock_waits</p>
+<p>四、终极方法</p>
+<p>小结</p>
+<h2 id="一、问题抛出"><a href="#一、问题抛出" class="headerlink" title="一、问题抛出"></a>一、问题抛出</h2><h4 id="在做查询语句时，MySQL-抛出了这样的异常："><a href="#在做查询语句时，MySQL-抛出了这样的异常：" class="headerlink" title="在做查询语句时，MySQL 抛出了这样的异常："></a>在做查询语句时，MySQL 抛出了这样的异常：</h4><pre><code>    MySQL server error report:Array
+    (
+        [0] =&gt; Array
+            (
+                [message] =&gt; MySQL Query Error
+            )
+     
+        [1] =&gt; Array
+            (
+                [sql] =&gt; SELECT * FROM taobao_trade WHERE order_status = 1 and orderID =&#39;2018061812306547&#39; AND is_tran_success=0 for update
+            )
+     
+        [2] =&gt; Array
+            (
+                [error] =&gt; Lock wait timeout exceeded; try restarting transaction
+            )
+     
+        [3] =&gt; Array
+            (
+                [errno] =&gt; 1205
+            )
+     
+    )
+    即Lock wait timeout exceeded; try restarting transaction的异常，错误提示的意思，很明显，是因为这条语句被锁住了，所以释放这个锁。
 </code></pre>
-<h3 id="3、cat"><a href="#3、cat" class="headerlink" title="3、cat"></a>3、cat</h3><pre><code>cat 是由第一行到最后一行连续显示在屏幕上
+<h2 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h2><h4 id="我们可以通过到information-schema-中来进行查找被锁的语句。"><a href="#我们可以通过到information-schema-中来进行查找被锁的语句。" class="headerlink" title="我们可以通过到information_schema 中来进行查找被锁的语句。"></a>我们可以通过到information_schema 中来进行查找被锁的语句。</h4><pre><code>    解释： information_schema这张数据表保存了MySQL服务器所有数据库的信息。如数据库名，数据库的表，表栏的数据类型与访问权限等。再简单点，这台MySQL服务器上，到底有哪些数据库、各个数据库有哪些表，每张表的字段类型是什么，各个数据库要什么权限才能访问，等等信息都保存在information_schema表里面。
+    我们可以用下面三张表来查原因：
 
- $ cat filename                    // 一次显示整个文件 
+    innodb_trx 当前运行的所有事务
+    innodb_locks 当前出现的锁
+    innodb_lock_waits 锁等待的对应关系
+    如果数据库中有锁的话，我们可以使用这条语句来查看：
 
- $ cat &gt; filename                 //从键盘创建一个文件 
+    select * from information_schema.innodb_trx
+    clipboard.png
 
-$cat file1 file2 &gt; file            //将几个文件合并为一个文件,只能创建新文件,不能编辑已有文件.
+    图中红色语句 LOCK WAIT为占用系统资源的语句，我们需要杀掉这个锁，执行 kill 线程id号。上面这条记录的id为199120823069, trx_mysql_thread_id 为 738178711, 所以我们执行：kill 738178711杀掉这个MySQL语句的线程即可。
 
-$cat -n textfile1 &gt; textfile2 //将一个日志文件的内容追加到另外一个 : 
+    执行之后：
 
-$cat : &gt;textfile2                // 清空一个日志文件
+    kill 738178711
+     
+    // 查询线程
+    // SELECT * from information_schema.processlist WHERE id = 738178711;
+    // show full processlist;
+    clipboard.png
 
-注意：     &gt;意思是创建，       &gt;&gt;是追加。
-cat其他参数与tail 类似
+    其他的记录不需要关注，因为其他的记录状态为“RUNNING” 即正在执行的事务，并没有锁。
 </code></pre>
-<h3 id="4-tac"><a href="#4-tac" class="headerlink" title="4.tac"></a>4.tac</h3><pre><code>tac 则是由最后一行到第一行反向在萤幕上显示出来
+<h2 id="三、三张表字段说明"><a href="#三、三张表字段说明" class="headerlink" title="三、三张表字段说明"></a>三、三张表字段说明</h2><h4 id="innodb-trx"><a href="#innodb-trx" class="headerlink" title="innodb_trx"></a>innodb_trx</h4><h4 id="desc-information-schema-innodb-trx"><a href="#desc-information-schema-innodb-trx" class="headerlink" title="desc information_schema.innodb_trx;"></a>desc information_schema.innodb_trx;</h4><h4 id="clipboard-png"><a href="#clipboard-png" class="headerlink" title="clipboard.png"></a>clipboard.png</h4><pre><code>    innodb_locks
+    desc information_schema.innodb_locks;
+    clipboard.png
+
+    innodb_lock_waits
+    desc information_schema.innodb_lock_waits
+    clipboard.png
 </code></pre>
-<h3 id="5-sed"><a href="#5-sed" class="headerlink" title="5.sed"></a>5.sed</h3><pre><code> 这个命令可以查找日志文件特定的一段 , 也可以根据时间的一个范围查询
-//按照行号
-  sed -n &#39;2,100p&#39; catalina.out
-   //这样你就可以只查看文件的第5行到第10行。
-   //按照时间段
-sed -n &#39;/2019-01-17 10:07:10/,/2019-02-14 16:54:01/p&#39; catalina.out
+<h2 id="四、终极方法"><a href="#四、终极方法" class="headerlink" title="四、终极方法"></a>四、终极方法</h2><h4 id="如果以上方法杀掉线程，但还是不能解决，则我们就可以查找执行线程用时比较久的用户，然后直接干掉。"><a href="#如果以上方法杀掉线程，但还是不能解决，则我们就可以查找执行线程用时比较久的用户，然后直接干掉。" class="headerlink" title="如果以上方法杀掉线程，但还是不能解决，则我们就可以查找执行线程用时比较久的用户，然后直接干掉。"></a>如果以上方法杀掉线程，但还是不能解决，则我们就可以查找执行线程用时比较久的用户，然后直接干掉。</h4><pre><code>    SELECT * from information_schema.`PROCESSLIST` WHERE Time &gt; 1000 AND USER = &#39;wonguser&#39; ORDER BY TIME desc;
+
+    kill 740097562
+
+    这样把所有耗时比较久的任务干掉，就可以解决这个问题了。
 </code></pre>
-<h3 id="6-less"><a href="#6-less" class="headerlink" title="6.less"></a>6.less</h3><pre><code>less log.log 
-
-shift + G 命令到文件尾部  然后输入 ？加上你要搜索的关键字例如 ？1213
-
-shift+n  关键字之间进行切换
-</code></pre>
-<h2 id="附录1"><a href="#附录1" class="headerlink" title="附录1"></a>附录1</h2><pre><code>history // 所有的历史记录
-
-history | grep XXX  // 历史记录中包含某些指令的记录
-
-history | more // 分页查看记录
-
-history -c // 清空所有的历史记录
-
-!! 重复执行上一个命令
-
-查询出来记录后选中 :　!323
-</code></pre>
-<h3 id="7、echo"><a href="#7、echo" class="headerlink" title="7、echo"></a>7、echo</h3><pre><code>    输出 echo &quot;12345&quot;
-</code></pre>
-<h2 id="附录2"><a href="#附录2" class="headerlink" title="附录2"></a>附录2</h2><h3 id="linux日志文件说明"><a href="#linux日志文件说明" class="headerlink" title="linux日志文件说明"></a>linux日志文件说明</h3><pre><code>/var/log/message 系统启动后的信息和错误日志，是Red Hat Linux中最常用的日志之一
-/var/log/secure 与安全相关的日志信息
-/var/log/maillog 与邮件相关的日志信息
-/var/log/cron 与定时任务相关的日志信息
-/var/log/spooler 与UUCP和news设备相关的日志信息
-/var/log/boot.log 守护进程启动和停止相关的日志消息
-/var/log/wtmp 该日志文件永久记录每个用户登录、注销及系统的启动、停机的事件
-</code></pre>
-<h2 id="附录3"><a href="#附录3" class="headerlink" title="附录3"></a>附录3</h2><pre><code>tomcat运行日志
-
-1、先切换到：cd usr/local/tomcat3/logs 
-
-2、tail -f catalina.out 
-
-3、这样运行时就可以实时查看运行日志了  
-
-4. grep &#39;关键字&#39; log文件名称 &gt; 目录/文件名
-
- Ctrl+c 是退出tail命令。  alt+E+R 重置
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><pre><code>    ransaction这样的异常，在网上找了许多未找出具体的解决方法，后来自己灵光一现，可以找出那些好事比较久的线程，然后把那些可疑的线程杀掉，没想到这个问题就解决了，可以正常对这行数据进行操作了。
 </code></pre>
 
       
@@ -356,7 +330,7 @@ history -c // 清空所有的历史记录
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/02/16/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/03/11/Lock-wait-timeout-exceeded-try-restarting-transaction/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -370,18 +344,9 @@ history -c // 清空所有的历史记录
   
 <nav id="article-nav">
   
-    <a href="/2022/03/11/Lock-wait-timeout-exceeded-try-restarting-transaction/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Lock wait timeout exceeded; try restarting transaction
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/02/16/Git-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%A7%E5%85%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Git 命令行大全</div>
+    <a href="/2022/02/16/linux%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">linux查看日志的几种方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
